@@ -19,7 +19,7 @@ namespace TimeTracker.Application.Tags.Commands.UpdateTag
         {
             var entity = await dbContext.Tags.FirstOrDefaultAsync(tag => tag.Id == request.Id, cancellationToken);
 
-            if(entity == null)
+            if(entity == null) // TODO: add user id
             {
                 throw new NotFoundException(nameof(Tag), request.Id);
             }

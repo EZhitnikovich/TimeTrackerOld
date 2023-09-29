@@ -16,7 +16,7 @@ namespace TimeTracker.Application.Tags.Commands.CreateTag
         public async Task<Guid> Handle(CreateTagCommand request, CancellationToken cancellationToken)
         {
             var tag = new Tag
-            {
+            { // TODO: add user id
                 Title = request.Title,
                 CreationDate = DateTime.Now,
                 EditDate = null,
