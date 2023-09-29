@@ -5,6 +5,18 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeTrackerApi", "src\TimeTrackerApi.csproj", "{0263C27C-B7C9-4013-AEE0-4104A15B10E1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTracker.Domain", "TimeTracker.Domain\TimeTracker.Domain.csproj", "{0ADDADDF-A791-4F72-8576-390D49BEA268}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTracker.Persistence", "TimeTracker.Persistence\TimeTracker.Persistence.csproj", "{64B21737-C00D-49AF-AA31-4A3B0AF80551}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTracker.Application", "TimeTracker.Application\TimeTracker.Application.csproj", "{2D92D506-40DC-421C-8CDF-D8AD764D63DB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{514762A1-B586-4704-8AA5-C0D3D1C72532}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{6BFA55B2-B449-490A-A76D-B6927B7610E5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{04E6A754-8EEC-4AEB-A8CA-04521CA2FBAC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +27,27 @@ Global
 		{0263C27C-B7C9-4013-AEE0-4104A15B10E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0263C27C-B7C9-4013-AEE0-4104A15B10E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0263C27C-B7C9-4013-AEE0-4104A15B10E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0ADDADDF-A791-4F72-8576-390D49BEA268}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0ADDADDF-A791-4F72-8576-390D49BEA268}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0ADDADDF-A791-4F72-8576-390D49BEA268}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0ADDADDF-A791-4F72-8576-390D49BEA268}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64B21737-C00D-49AF-AA31-4A3B0AF80551}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64B21737-C00D-49AF-AA31-4A3B0AF80551}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64B21737-C00D-49AF-AA31-4A3B0AF80551}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64B21737-C00D-49AF-AA31-4A3B0AF80551}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D92D506-40DC-421C-8CDF-D8AD764D63DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D92D506-40DC-421C-8CDF-D8AD764D63DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D92D506-40DC-421C-8CDF-D8AD764D63DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D92D506-40DC-421C-8CDF-D8AD764D63DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0263C27C-B7C9-4013-AEE0-4104A15B10E1} = {6BFA55B2-B449-490A-A76D-B6927B7610E5}
+		{0ADDADDF-A791-4F72-8576-390D49BEA268} = {514762A1-B586-4704-8AA5-C0D3D1C72532}
+		{64B21737-C00D-49AF-AA31-4A3B0AF80551} = {04E6A754-8EEC-4AEB-A8CA-04521CA2FBAC}
+		{2D92D506-40DC-421C-8CDF-D8AD764D63DB} = {514762A1-B586-4704-8AA5-C0D3D1C72532}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {47D357CE-FD6A-4771-8EB6-502AE18BFE61}
