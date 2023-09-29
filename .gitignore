@@ -6,3 +6,6 @@
 /api/src/obj
 /api/src/.vs/
 /api/src/bin/Debug/net7.0
+/api/TimeTracker.Application/obj
+/api/TimeTracker.Domain/obj
+/api/TimeTracker.Persistence/obj

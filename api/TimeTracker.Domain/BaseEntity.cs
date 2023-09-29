@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TimeTrackerApi.Models
+namespace TimeTracker.Domain
 {
     public class BaseEntity
     {
-        [Key] public int Id { get; set; }
+        [Key] public Guid Id { get; set; }
     }
 }
