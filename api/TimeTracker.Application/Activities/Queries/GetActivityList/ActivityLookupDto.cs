@@ -19,7 +19,7 @@ namespace TimeTracker.Application.Activities.Queries.GetActivityList
                 .ForMember(vm => vm.Id,
                     opt => opt.MapFrom(activity => activity.Id))
                 .ForMember(vm => vm.Description,
-                    opt => opt.MapFrom(activity => activity.Id))
+                    opt => opt.MapFrom(activity => activity.Description))
                 .ForMember(vm => vm.Tags,
                     opt => opt.MapFrom(activity => activity.Tags))
                 .ForMember(vm => vm.Project,
