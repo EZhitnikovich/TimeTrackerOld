@@ -12,3 +12,6 @@
 /api/TimeTracker.Application/bin/Debug/net7.0
 /api/TimeTracker.Domain/bin/Debug/net7.0
 /api/TimeTracker.Persistence/bin/Debug/net7.0
+*.db-wal
+*.db-shm
+*.db
