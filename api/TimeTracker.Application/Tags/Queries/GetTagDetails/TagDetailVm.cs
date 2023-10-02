@@ -17,7 +17,7 @@ namespace TimeTracker.Application.Tags.Queries.GetTagDetails
                 .ForMember(vm => vm.Id,
                     opt => opt.MapFrom(tag => tag.Id))
                 .ForMember(vm => vm.Title,
-                    opt => opt.MapFrom(tag => tag.Id))
+                    opt => opt.MapFrom(tag => tag.Title))
                 .ForMember(vm => vm.CreationDate,
                     opt => opt.MapFrom(tag => tag.CreationDate))
                 .ForMember(vm => vm.EditDate,

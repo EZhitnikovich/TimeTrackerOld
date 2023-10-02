@@ -9,3 +9,6 @@
 /api/TimeTracker.Application/obj
 /api/TimeTracker.Domain/obj
 /api/TimeTracker.Persistence/obj
+/api/TimeTracker.Application/bin/Debug/net7.0
+/api/TimeTracker.Domain/bin/Debug/net7.0
+/api/TimeTracker.Persistence/bin/Debug/net7.0
