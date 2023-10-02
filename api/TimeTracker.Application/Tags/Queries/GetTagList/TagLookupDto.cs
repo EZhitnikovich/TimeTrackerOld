@@ -15,7 +15,7 @@ namespace TimeTracker.Application.Tags.Queries.GetTagList
                 .ForMember(vm => vm.Id,
                     opt => opt.MapFrom(tag => tag.Id))
                 .ForMember(vm => vm.Title,
-                    opt => opt.MapFrom(tag => tag.Id));
+                    opt => opt.MapFrom(tag => tag.Title));
         }
     }
 }
