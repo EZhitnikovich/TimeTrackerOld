@@ -9,7 +9,7 @@ namespace TimeTracker.Application.Activities.Commands.UpdateActivity
         public string Description { get; set; }
         public int StartInMilliseconds { get; set; }
         public int EndInMilliseconds { get; set;}
-        public Project? Project { get; set; }
-        public List<Tag> Tags { get; set; }
+        public Guid? ProjectId { get; set; }
+        public List<Guid> TagIds { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using TimeTracker.Application.Interfaces;
 using TimeTracker.Domain;
 
@@ -15,16 +16,22 @@ namespace TimeTracker.Application.Activities.Commands.CreateActivity
 
         public async Task<Guid> Handle(CreateActivityCommand request, CancellationToken cancellationToken)
         {
+            var project = await dbContext.Projects.FirstOrDefaultAsync(x => x.Id == request.ProjectId);
+            // TODO: check if use have access to project
+
+            var tags = await dbContext.Tags.Where(x => request.TagIds.Contains(x.Id)).ToListAsync();
+            // TODO: check if use have access to tags
+
             var activity = new Activity
             {
-                Id = request.Id, // TODO: maybe i should remove id here
+                Id = Guid.NewGuid(),
                 CreationDate = DateTime.Now,
                 Description = request.Description,
                 EditDate = null,
                 EndInMilliseconds = request.EndInMilliseconds,
                 StartInMilliseconds = request.StartInMilliseconds,
-                Project = request.Project,
-                Tags = request.Tags,
+                Project = project,
+                Tags = tags,
             };
 
             await dbContext.Activities.AddAsync(activity, cancellationToken);
