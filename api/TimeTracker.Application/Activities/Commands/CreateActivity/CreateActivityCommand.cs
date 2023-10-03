@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using TimeTracker.Domain;
 
 namespace TimeTracker.Application.Activities.Commands.CreateActivity
 {
