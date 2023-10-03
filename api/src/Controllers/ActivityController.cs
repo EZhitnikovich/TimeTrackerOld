@@ -2,13 +2,14 @@
 using Microsoft.AspNetCore.Mvc;
 using TimeTracker.Application.Activities.Commands.CreateActivity;
 using TimeTracker.Application.Activities.Commands.DeleteActivity;
+using TimeTracker.Application.Activities.Commands.StartActivity;
+using TimeTracker.Application.Activities.Commands.StopActivity;
 using TimeTracker.Application.Activities.Commands.UpdateActivity;
 using TimeTracker.Application.Activities.Queries.GetActivityList;
 using TimeTrackerApi.Models;
 
 namespace TimeTrackerApi.Controllers
 {
-    [Route("api/[controller]")]
     public class ActivityController: BaseController
     {
         private readonly IMapper mapper;
@@ -51,6 +52,23 @@ namespace TimeTrackerApi.Controllers
             {
                 Id = id
             };
+            await Mediator.Send(command);
+            return NoContent();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<Guid>> Start([FromBody] StartActivityDto startActivityDto)
+        {
+            var command = mapper.Map<StartActivityCommand>(startActivityDto);
+            // TODO: add user id
+            var id = await Mediator.Send(command);
+            return Ok(id);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Stop(Guid id)
+        {
+            var command = new StopActivityCommand { Id = id };
             await Mediator.Send(command);
             return NoContent();
         }
