@@ -9,7 +9,6 @@ using TimeTrackerApi.Models;
 
 namespace TimeTrackerApi.Controllers
 {
-    [Route("api/[controller]")]
     public class TagsController : BaseController // TOOD: check exceptions
     {
         private readonly IMapper mapper;
