@@ -8,7 +8,7 @@ namespace TimeTracker.Application.Activities.Commands.CreateActivity
         public string Description { get; set; }
         public List<Guid> TagIds { get; set; }
         public Guid? ProjectId { get; set; }
-        public int StartInMilliseconds { get; set; }
-        public int? EndInMilliseconds { get; set; }
+        public long StartInMilliseconds { get; set; }
+        public long? EndInMilliseconds { get; set; }
     }
 }

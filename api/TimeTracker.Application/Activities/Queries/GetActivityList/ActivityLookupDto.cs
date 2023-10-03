@@ -10,8 +10,8 @@ namespace TimeTracker.Application.Activities.Queries.GetActivityList
         public string Description { get; set; }
         public List<Tag> Tags { get; set; }
         public Project? Project { get; set; }
-        public int StartInMilliseconds { get; set; }
-        public int? EndInMilliseconds { get; set; }
+        public long StartInMilliseconds { get; set; }
+        public long? EndInMilliseconds { get; set; }
 
         public void Mapping(Profile profile)
         {
