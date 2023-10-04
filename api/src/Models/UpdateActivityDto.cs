@@ -9,8 +9,8 @@ namespace TimeTrackerApi.Models
     {
         public Guid Id { get; set; }
         public string Description { get; set; }
-        public List<Guid> Tags { get; set; }
-        public Guid? Project { get; set; }
+        public List<Guid> TagIds { get; set; }
+        public Guid? ProjectId { get; set; }
         public long StartInMilliseconds { get; set; }
         public long? EndInMilliseconds { get; set; }
 
@@ -22,9 +22,9 @@ namespace TimeTrackerApi.Models
                 .ForMember(cmd => cmd.Description,
                     opt => opt.MapFrom(dto => dto.Description))
                 .ForMember(cmd => cmd.TagIds,
-                    opt => opt.MapFrom(dto => dto.Tags))
+                    opt => opt.MapFrom(dto => dto.TagIds))
                 .ForMember(cmd => cmd.ProjectId,
-                    opt => opt.MapFrom(dto => dto.Project))
+                    opt => opt.MapFrom(dto => dto.ProjectId))
                 .ForMember(cmd => cmd.StartInMilliseconds,
                     opt => opt.MapFrom(dto => dto.StartInMilliseconds))
                 .ForMember(cmd => cmd.EndInMilliseconds,

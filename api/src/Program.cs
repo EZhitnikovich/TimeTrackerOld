@@ -3,6 +3,7 @@ using TimeTracker.Application.Common.Mappings;
 using TimeTracker.Application.Interfaces;
 using TimeTracker.Application;
 using TimeTracker.Persistence;
+using TimeTrackerApi.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -55,6 +56,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCustomExceptionHandler();
+//app.UseRouting();
 app.UseCors("AllowAll");
 
 app.UseAuthorization();
