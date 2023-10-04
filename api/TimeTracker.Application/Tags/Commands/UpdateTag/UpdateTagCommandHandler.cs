@@ -6,7 +6,7 @@ using TimeTracker.Domain;
 
 namespace TimeTracker.Application.Tags.Commands.UpdateTag
 {
-    internal class UpdateTagCommandHandler : IRequestHandler<UpdateTagCommand>
+    internal class UpdateTagCommandHandler : IRequestHandler<UpdateTagCommand, Unit>
     {
         private readonly ITimeTrackerDbContext dbContext;
 
@@ -15,7 +15,7 @@ namespace TimeTracker.Application.Tags.Commands.UpdateTag
             this.dbContext = dbContext;
         }
 
-        public async Task Handle(UpdateTagCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateTagCommand request, CancellationToken cancellationToken)
         {
             var entity = await dbContext.Tags.FirstOrDefaultAsync(tag => tag.Id == request.Id, cancellationToken);
 
@@ -28,6 +28,8 @@ namespace TimeTracker.Application.Tags.Commands.UpdateTag
             entity.Title = request.Title;
 
             await dbContext.SaveChangesAsync(cancellationToken);
+
+            return Unit.Value;
         }
     }
 }

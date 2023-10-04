@@ -6,7 +6,7 @@ using TimeTracker.Domain;
 
 namespace TimeTracker.Application.Activities.Commands.DeleteActivity
 {
-    public class DeleteActivityCommandHandler : IRequestHandler<DeleteActivityCommand>
+    public class DeleteActivityCommandHandler : IRequestHandler<DeleteActivityCommand, Unit>
     {
         private readonly ITimeTrackerDbContext dbContext;
 
@@ -15,7 +15,7 @@ namespace TimeTracker.Application.Activities.Commands.DeleteActivity
             this.dbContext = dbContext;
         }
 
-        public async Task Handle(DeleteActivityCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteActivityCommand request, CancellationToken cancellationToken)
         {
             var activity = await dbContext.Activities
                 .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
@@ -26,6 +26,8 @@ namespace TimeTracker.Application.Activities.Commands.DeleteActivity
             }
 
             dbContext.Activities.Remove(activity);
+
+            return Unit.Value;
         }
     }
 }

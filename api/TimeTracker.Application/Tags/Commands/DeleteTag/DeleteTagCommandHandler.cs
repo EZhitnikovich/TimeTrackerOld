@@ -6,7 +6,7 @@ using TimeTracker.Domain;
 
 namespace TimeTracker.Application.Tags.Commands.DeleteTag
 {
-    public class DeleteTagCommandHandler : IRequestHandler<DeleteTagCommand>
+    public class DeleteTagCommandHandler : IRequestHandler<DeleteTagCommand, Unit>
     {
         private readonly ITimeTrackerDbContext dbContext;
 
@@ -15,7 +15,7 @@ namespace TimeTracker.Application.Tags.Commands.DeleteTag
             this.dbContext = dbContext;
         }
 
-        public async Task Handle(DeleteTagCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteTagCommand request, CancellationToken cancellationToken)
         {
             var entity = await dbContext.Tags.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
@@ -26,6 +26,8 @@ namespace TimeTracker.Application.Tags.Commands.DeleteTag
 
             dbContext.Tags.Remove(entity);
             await dbContext.SaveChangesAsync(cancellationToken);
+
+            return Unit.Value;
         }
     }
 }

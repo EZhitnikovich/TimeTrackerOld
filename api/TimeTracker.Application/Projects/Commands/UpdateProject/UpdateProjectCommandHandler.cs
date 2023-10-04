@@ -6,7 +6,7 @@ using TimeTracker.Domain;
 
 namespace TimeTracker.Application.Projects.Commands.UpdateProject
 {
-    internal class UpdateProjectCommandHandler : IRequestHandler<UpdateProjectCommand>
+    internal class UpdateProjectCommandHandler : IRequestHandler<UpdateProjectCommand, Unit>
     {
         private readonly ITimeTrackerDbContext dbContext;
 
@@ -15,7 +15,7 @@ namespace TimeTracker.Application.Projects.Commands.UpdateProject
             this.dbContext = dbContext;
         }
 
-        public async Task Handle(UpdateProjectCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateProjectCommand request, CancellationToken cancellationToken)
         {
             var entity = await dbContext.Projects.FirstOrDefaultAsync(project => project.Id == request.Id, cancellationToken);
 
@@ -28,6 +28,8 @@ namespace TimeTracker.Application.Projects.Commands.UpdateProject
             entity.Title = request.Title;
 
             await dbContext.SaveChangesAsync(cancellationToken);
+
+            return Unit.Value;
         }
     }
 }

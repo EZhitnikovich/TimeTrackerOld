@@ -6,7 +6,7 @@ using TimeTracker.Domain;
 
 namespace TimeTracker.Application.Activities.Commands.UpdateActivity
 {
-    public class UpdateActivityCommandHandler : IRequestHandler<UpdateActivityCommand>
+    public class UpdateActivityCommandHandler : IRequestHandler<UpdateActivityCommand, Unit>
     {
         private readonly ITimeTrackerDbContext dbContext;
 
@@ -15,7 +15,7 @@ namespace TimeTracker.Application.Activities.Commands.UpdateActivity
             this.dbContext = dbContext;
         }
 
-        public async Task Handle(UpdateActivityCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateActivityCommand request, CancellationToken cancellationToken)
         {
             var activity = await dbContext.Activities.FirstOrDefaultAsync(x=> x.Id == request.Id, cancellationToken);
 
@@ -38,6 +38,8 @@ namespace TimeTracker.Application.Activities.Commands.UpdateActivity
             activity.EndInMilliseconds = request.EndInMilliseconds;
 
             await dbContext.SaveChangesAsync(cancellationToken);
+
+            return Unit.Value;
         }
     }
 }

@@ -6,7 +6,7 @@ using TimeTracker.Domain;
 
 namespace TimeTracker.Application.Activities.Commands.StopActivity
 {
-    public class StopActivityCommandHandler : IRequestHandler<StopActivityCommand>
+    public class StopActivityCommandHandler : IRequestHandler<StopActivityCommand, Unit>
     {
         private readonly ITimeTrackerDbContext dbContext;
 
@@ -15,7 +15,7 @@ namespace TimeTracker.Application.Activities.Commands.StopActivity
             this.dbContext = dbContext;
         }
 
-        public async Task Handle(StopActivityCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(StopActivityCommand request, CancellationToken cancellationToken)
         {
             var activity = await dbContext.Activities.FirstOrDefaultAsync(x => x.Id == request.Id);
 
@@ -29,6 +29,8 @@ namespace TimeTracker.Application.Activities.Commands.StopActivity
                 activity.EndInMilliseconds = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
                 await dbContext.SaveChangesAsync(cancellationToken);
             }
+
+            return Unit.Value;
         }
     }
 }

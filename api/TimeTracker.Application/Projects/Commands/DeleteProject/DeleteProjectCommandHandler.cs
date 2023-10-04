@@ -6,7 +6,7 @@ using TimeTracker.Domain;
 
 namespace TimeTracker.Application.Projects.Commands.DeleteProject
 {
-    public class DeleteProjectCommandHandler : IRequestHandler<DeleteProjectCommand>
+    public class DeleteProjectCommandHandler : IRequestHandler<DeleteProjectCommand, Unit>
     {
         private readonly ITimeTrackerDbContext dbContext;
 
@@ -15,7 +15,7 @@ namespace TimeTracker.Application.Projects.Commands.DeleteProject
             this.dbContext = dbContext;
         }
 
-        public async Task Handle(DeleteProjectCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteProjectCommand request, CancellationToken cancellationToken)
         {
             var entity = await dbContext.Projects.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
@@ -26,6 +26,8 @@ namespace TimeTracker.Application.Projects.Commands.DeleteProject
 
             dbContext.Projects.Remove(entity);
             await dbContext.SaveChangesAsync(cancellationToken);
+
+            return Unit.Value;
         }
     }
 }
