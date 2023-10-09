@@ -1,16 +1,16 @@
 ﻿using AutoMapper;
 using TimeTracker.Application.Common.Mappings;
-using TimeTracker.Application.Tags.Commands.CreateTag;
+using TimeTracker.Application.Projects.Commands.CreateProject;
 
-namespace TimeTrackerApi.Models
+namespace TimeTracker.Api.Models
 {
-    public class CreateTagDto : IMapWith<CreateTagCommand>
+    public class CreateProjectDto : IMapWith<CreateProjectCommand>
     {
         public string Title { get; set; }
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<CreateTagDto, CreateTagCommand>()
+            profile.CreateMap<CreateProjectDto, CreateProjectCommand>()
                 .ForMember(cmd => cmd.Title,
                     opt => opt.MapFrom(dto => dto.Title));
         }

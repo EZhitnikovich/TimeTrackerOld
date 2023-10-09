@@ -1,4 +1,4 @@
-﻿namespace TimeTrackerApi.Middleware
+﻿namespace TimeTracker.Api.Middleware
 {
     public static class CustomExceptionHandlerMiddlewareExtensions
     {

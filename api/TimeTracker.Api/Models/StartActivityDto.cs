@@ -2,7 +2,7 @@
 using TimeTracker.Application.Activities.Commands.StartActivity;
 using TimeTracker.Application.Common.Mappings;
 
-namespace TimeTrackerApi.Models
+namespace TimeTracker.Api.Models
 {
     public class StartActivityDto : IMapWith<StartActivityCommand>
     {

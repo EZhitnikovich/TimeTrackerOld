@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
-namespace TimeTrackerApi.Controllers
+namespace TimeTracker.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]/[action]")]

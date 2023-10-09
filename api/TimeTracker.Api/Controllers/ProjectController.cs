@@ -5,9 +5,9 @@ using TimeTracker.Application.Projects.Commands.DeleteProject;
 using TimeTracker.Application.Projects.Commands.UpdateProject;
 using TimeTracker.Application.Projects.Queries.GetProjectDetails;
 using TimeTracker.Application.Projects.Queries.GetProjectList;
-using TimeTrackerApi.Models;
+using TimeTracker.Api.Models;
 
-namespace TimeTrackerApi.Controllers
+namespace TimeTracker.Api.Controllers
 {
     public class ProjectController: BaseController
     {

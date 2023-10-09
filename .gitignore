@@ -15,3 +15,6 @@
 *.db-wal
 *.db-shm
 *.db
+/api/TimeTracker.Api/bin/Debug/net7.0
+/api/TimeTracker.Api/obj
+/api/TimeTraker.Api/obj

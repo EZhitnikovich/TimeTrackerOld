@@ -5,9 +5,9 @@ using TimeTracker.Application.Tags.Commands.DeleteTag;
 using TimeTracker.Application.Tags.Commands.UpdateTag;
 using TimeTracker.Application.Tags.Queries.GetTagDetails;
 using TimeTracker.Application.Tags.Queries.GetTagList;
-using TimeTrackerApi.Models;
+using TimeTracker.Api.Models;
 
-namespace TimeTrackerApi.Controllers
+namespace TimeTracker.Api.Controllers
 {
     public class TagsController : BaseController // TOOD: check exceptions
     {

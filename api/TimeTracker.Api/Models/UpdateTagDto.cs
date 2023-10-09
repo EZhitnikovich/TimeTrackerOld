@@ -2,7 +2,7 @@
 using TimeTracker.Application.Common.Mappings;
 using TimeTracker.Application.Tags.Commands.UpdateTag;
 
-namespace TimeTrackerApi.Models
+namespace TimeTracker.Api.Models
 {
     public class UpdateTagDto : IMapWith<UpdateTagCommand>
     {

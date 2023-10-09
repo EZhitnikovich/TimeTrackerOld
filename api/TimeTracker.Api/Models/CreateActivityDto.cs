@@ -3,7 +3,7 @@ using TimeTracker.Application.Activities.Commands.CreateActivity;
 using TimeTracker.Application.Common.Mappings;
 using TimeTracker.Domain;
 
-namespace TimeTrackerApi.Models
+namespace TimeTracker.Api.Models
 {
     public class CreateActivityDto : IMapWith<CreateActivityCommand>
     {

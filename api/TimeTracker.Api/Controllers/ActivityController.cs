@@ -6,9 +6,9 @@ using TimeTracker.Application.Activities.Commands.StartActivity;
 using TimeTracker.Application.Activities.Commands.StopActivity;
 using TimeTracker.Application.Activities.Commands.UpdateActivity;
 using TimeTracker.Application.Activities.Queries.GetActivityList;
-using TimeTrackerApi.Models;
+using TimeTracker.Api.Models;
 
-namespace TimeTrackerApi.Controllers
+namespace TimeTracker.Api.Controllers
 {
     public class ActivityController: BaseController
     {

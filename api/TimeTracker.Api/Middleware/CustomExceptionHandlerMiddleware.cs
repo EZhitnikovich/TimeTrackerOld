@@ -3,7 +3,7 @@ using System.Net;
 using System.Text.Json;
 using TimeTracker.Application.Common.Exceptions;
 
-namespace TimeTrackerApi.Middleware
+namespace TimeTracker.Api.Middleware
 {
     public class CustomExceptionHandlerMiddleware
     {

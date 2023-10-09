@@ -2,7 +2,7 @@
 using TimeTracker.Application.Common.Mappings;
 using TimeTracker.Application.Projects.Commands.UpdateProject;
 
-namespace TimeTrackerApi.Models
+namespace TimeTracker.Api.Models
 {
     public class UpdateProjectDto : IMapWith<UpdateProjectCommand>
     {
