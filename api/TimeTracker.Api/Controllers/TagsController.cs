@@ -6,6 +6,7 @@ using TimeTracker.Application.Tags.Commands.UpdateTag;
 using TimeTracker.Application.Tags.Queries.GetTagDetails;
 using TimeTracker.Application.Tags.Queries.GetTagList;
 using TimeTracker.Api.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TimeTracker.Api.Controllers
 {
@@ -19,6 +20,7 @@ namespace TimeTracker.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<TagListVm>> GetAll()
         {
             var query = new GetTagListQuery(); // TODO: add user id
@@ -27,6 +29,7 @@ namespace TimeTracker.Api.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<TagDetailVm>> Get(Guid id)
         {
             var query = new GetTagDetailsQuery // TODO: add user id
@@ -38,6 +41,7 @@ namespace TimeTracker.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Guid>> Create([FromBody] CreateTagDto createTagDto)
         {
             var command = mapper.Map<CreateTagCommand>(createTagDto);
@@ -47,6 +51,7 @@ namespace TimeTracker.Api.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public async Task<IActionResult> Update([FromBody] UpdateTagDto updateTagDto)
         {
             var command = mapper.Map<UpdateTagCommand>(updateTagDto);
@@ -56,6 +61,7 @@ namespace TimeTracker.Api.Controllers
         }
 
         [HttpDelete]
+        [Authorize]
         public async Task<IActionResult> Delete(Guid id)
         {
             var command = new DeleteTagCommand

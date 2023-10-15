@@ -6,6 +6,7 @@ using TimeTracker.Application.Projects.Commands.UpdateProject;
 using TimeTracker.Application.Projects.Queries.GetProjectDetails;
 using TimeTracker.Application.Projects.Queries.GetProjectList;
 using TimeTracker.Api.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TimeTracker.Api.Controllers
 {
@@ -19,6 +20,7 @@ namespace TimeTracker.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<ProjectListVm>> GetAll()
         {
             var query = new GetProjectListQuery(); // TODO: add user id 
@@ -27,6 +29,7 @@ namespace TimeTracker.Api.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<ProjectDetailVm>> Get(Guid id)
         {
             var query = new GetProjectDetailsQuery // TODO: add user id
@@ -38,6 +41,7 @@ namespace TimeTracker.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Guid>> Create([FromBody] CreateProjectDto createProjectDto)
         {
             var command = mapper.Map<CreateProjectCommand>(createProjectDto);
@@ -47,6 +51,7 @@ namespace TimeTracker.Api.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public async Task<IActionResult> Update([FromBody] UpdateProjectDto updateProjectDto)
         {
             var command = mapper.Map<UpdateProjectCommand>(updateProjectDto);
@@ -56,6 +61,7 @@ namespace TimeTracker.Api.Controllers
         }
 
         [HttpDelete]
+        [Authorize]
         public async Task<IActionResult> Delete(Guid id)
         {
             var command = new DeleteProjectCommand

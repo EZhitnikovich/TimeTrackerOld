@@ -7,6 +7,7 @@ using TimeTracker.Application.Activities.Commands.StopActivity;
 using TimeTracker.Application.Activities.Commands.UpdateActivity;
 using TimeTracker.Application.Activities.Queries.GetActivityList;
 using TimeTracker.Api.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TimeTracker.Api.Controllers
 {
@@ -20,6 +21,7 @@ namespace TimeTracker.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<ActivityListVm>> GetAll()
         {
             var command = new GetActivityListQuery(); // TODO: add user id
@@ -28,6 +30,7 @@ namespace TimeTracker.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Guid>> Create([FromBody] CreateActivityDto createActivityDto)
         {
             var command = mapper.Map<CreateActivityCommand>(createActivityDto);
@@ -37,6 +40,7 @@ namespace TimeTracker.Api.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public async Task<IActionResult> Update([FromBody] UpdateActivityDto updateActivityDto)
         {
             var command = mapper.Map<UpdateActivityCommand>(updateActivityDto);
@@ -46,6 +50,7 @@ namespace TimeTracker.Api.Controllers
         }
 
         [HttpDelete]
+        [Authorize]
         public async Task<IActionResult> Delete(Guid id)
         {
             var command = new DeleteActivityCommand
@@ -57,6 +62,7 @@ namespace TimeTracker.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Guid>> Start([FromBody] StartActivityDto startActivityDto)
         {
             var command = mapper.Map<StartActivityCommand>(startActivityDto);
@@ -66,6 +72,7 @@ namespace TimeTracker.Api.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public async Task<IActionResult> Stop(Guid id)
         {
             var command = new StopActivityCommand { Id = id };

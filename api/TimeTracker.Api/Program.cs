@@ -4,6 +4,8 @@ using TimeTracker.Application.Interfaces;
 using TimeTracker.Application;
 using TimeTracker.Persistence;
 using TimeTracker.Api.Middleware;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +14,32 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(option =>
+    {
+        option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+        {
+            In = ParameterLocation.Header,
+            Type = SecuritySchemeType.Http,
+            BearerFormat = "JWT",
+            Scheme = "bearer",
+            Name = "Authorization",
+            Description = "Authorization token"
+        });
+        option.AddSecurityRequirement(new OpenApiSecurityRequirement()
+        {
+            {
+                new OpenApiSecurityScheme
+                {
+                    Reference = new OpenApiReference()
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer"
+                    }
+                },
+                new string[] {}
+            }
+        });
+    });
 
 builder.Services.AddAutoMapper(config =>
 {
@@ -32,6 +59,18 @@ builder.Services.AddCors(options =>
         policy.AllowAnyOrigin();
     });
 });
+
+builder.Services.AddAuthentication(config =>
+{
+    config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    config.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddJwtBearer("Bearer", options =>
+    {
+        options.Authority = "https://localhost:59001/";
+        options.Audience = "TimeTrackerWebAPI";
+        options.RequireHttpsMetadata = false;
+    });
 
 var app = builder.Build();
 
@@ -57,9 +96,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCustomExceptionHandler();
-//app.UseRouting();
+app.UseRouting();
 app.UseCors("AllowAll");
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
