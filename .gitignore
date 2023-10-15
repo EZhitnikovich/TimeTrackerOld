@@ -17,4 +17,11 @@
 *.db
 /api/TimeTracker.Api/bin/Debug/net7.0
 /api/TimeTracker.Api/obj
-/api/TimeTraker.Api/obj
+/TimeTracker.Identity/.vs/TimeTracker.Identity
+/TimeTracker.Identity/TimeTracker.Identity/bin/Debug/net7.0
+/TimeTracker.Identity/TimeTracker.Identity/obj
+/TimeTracker.Identity/.vs/ProjectEvaluation
+/api/TimeTracker.Api/bin/Release/net7.0
+/api/TimeTracker.Application/bin/Release/net7.0
+/api/TimeTracker.Domain/bin/Release/net7.0
+/api/TimeTracker.Persistence/bin/Release/net7.0
