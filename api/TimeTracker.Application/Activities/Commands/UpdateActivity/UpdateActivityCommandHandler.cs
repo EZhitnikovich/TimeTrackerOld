@@ -19,21 +19,18 @@ namespace TimeTracker.Application.Activities.Commands.UpdateActivity
         {
             var activity = await dbContext.Activities.FirstOrDefaultAsync(x=> x.Id == request.Id, cancellationToken);
 
-            if (activity == null)
+            if (activity == null || activity.UserId != request.UserId)
             {
                 throw new NotFoundException(nameof(Activity), request.Id);
             }
 
-            var project = await dbContext.Projects.FirstOrDefaultAsync(x => x.Id == request.ProjectId);
-            // TODO: check if use have access to project
-
-            var tags = await dbContext.Tags.Where(x => request.TagIds.Contains(x.Id)).ToListAsync();
-            // TODO: check if use have access to tags
+            var project = await dbContext.Projects.FirstOrDefaultAsync(x => x.Id == request.ProjectId && x.UserId == request.UserId);
+            var tags = await dbContext.Tags.Where(x => x.UserId == request.UserId && request.TagIds.Contains(x.Id)).ToListAsync();
 
             activity.EditDate = DateTime.Now;
             activity.Description = request.Description;
             activity.Project = project;
-            activity.Tags = tags; // TODO: check tags
+            activity.Tags = tags;
             activity.StartInMilliseconds = request.StartInMilliseconds;
             activity.EndInMilliseconds = request.EndInMilliseconds;
 

@@ -19,7 +19,7 @@ namespace TimeTracker.Application.Activities.Commands.StopActivity
         {
             var activity = await dbContext.Activities.FirstOrDefaultAsync(x => x.Id == request.Id);
 
-            if (activity == null) // TODO: add user id
+            if (activity == null || activity.UserId != request.UserId)
             {
                 throw new NotFoundException(nameof(Activity), request.Id);
             }

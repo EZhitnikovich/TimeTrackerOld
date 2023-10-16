@@ -22,7 +22,7 @@ namespace TimeTracker.Application.Tags.Queries.GetTagDetails
         {
             var entity = await dbContext.Tags.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
-            if (entity == null)  // TODO: add user id
+            if (entity == null || entity.UserId != request.UserId)
             {
                 throw new NotFoundException(nameof(Tag), request.Id);
             }

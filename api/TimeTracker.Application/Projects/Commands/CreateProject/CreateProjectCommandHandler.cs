@@ -16,7 +16,8 @@ namespace TimeTracker.Application.Projects.Commands.CreateProject
         public async Task<Guid> Handle(CreateProjectCommand request, CancellationToken cancellationToken)
         {
             var project = new Project
-            { // TODO: add user id
+            { 
+                UserId = request.UserId,
                 Title = request.Title,
                 CreationDate = DateTime.Now,
                 EditDate = null,

@@ -3,7 +3,8 @@
 namespace TimeTracker.Application.Projects.Commands.DeleteProject
 {
     public class DeleteProjectCommand : IRequest<Unit>
-    { // TODO: add user id
+    {
+        public Guid UserId { get; set; }
         public Guid Id { get; set; }
     }
 }

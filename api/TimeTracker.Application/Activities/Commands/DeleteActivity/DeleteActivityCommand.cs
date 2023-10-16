@@ -3,7 +3,8 @@
 namespace TimeTracker.Application.Activities.Commands.DeleteActivity
 {
     public class DeleteActivityCommand : IRequest<Unit>
-    { // TODO: add user Id
+    {
+        public Guid UserId { get; set; }
         public Guid Id { get; set; }
     }
 }

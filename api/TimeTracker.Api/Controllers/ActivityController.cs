@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace TimeTracker.Api.Controllers
 {
-    public class ActivityController: BaseController
+    public class ActivityController : BaseController
     {
         private readonly IMapper mapper;
 
@@ -24,7 +24,10 @@ namespace TimeTracker.Api.Controllers
         [Authorize]
         public async Task<ActionResult<ActivityListVm>> GetAll()
         {
-            var command = new GetActivityListQuery(); // TODO: add user id
+            var command = new GetActivityListQuery()
+            {
+                UserId = UserId
+            };
             var vm = await Mediator.Send(command);
             return Ok(vm);
         }
@@ -34,7 +37,7 @@ namespace TimeTracker.Api.Controllers
         public async Task<ActionResult<Guid>> Create([FromBody] CreateActivityDto createActivityDto)
         {
             var command = mapper.Map<CreateActivityCommand>(createActivityDto);
-            // TODO: add user id
+            command.UserId = UserId;
             var id = await Mediator.Send(command);
             return Ok(id);
         }
@@ -44,7 +47,7 @@ namespace TimeTracker.Api.Controllers
         public async Task<IActionResult> Update([FromBody] UpdateActivityDto updateActivityDto)
         {
             var command = mapper.Map<UpdateActivityCommand>(updateActivityDto);
-            // TODO: add user id
+            command.UserId = UserId;
             await Mediator.Send(command);
             return NoContent();
         }
@@ -55,6 +58,7 @@ namespace TimeTracker.Api.Controllers
         {
             var command = new DeleteActivityCommand
             {
+                UserId = UserId,
                 Id = id
             };
             await Mediator.Send(command);
@@ -66,7 +70,7 @@ namespace TimeTracker.Api.Controllers
         public async Task<ActionResult<Guid>> Start([FromBody] StartActivityDto startActivityDto)
         {
             var command = mapper.Map<StartActivityCommand>(startActivityDto);
-            // TODO: add user id
+            command.UserId = UserId;
             var id = await Mediator.Send(command);
             return Ok(id);
         }
@@ -75,7 +79,7 @@ namespace TimeTracker.Api.Controllers
         [Authorize]
         public async Task<IActionResult> Stop(Guid id)
         {
-            var command = new StopActivityCommand { Id = id };
+            var command = new StopActivityCommand { Id = id, UserId = UserId };
             await Mediator.Send(command);
             return NoContent();
         }

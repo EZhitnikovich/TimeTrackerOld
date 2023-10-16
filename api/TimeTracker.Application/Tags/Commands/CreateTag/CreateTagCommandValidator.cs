@@ -7,6 +7,7 @@ namespace TimeTracker.Application.Tags.Commands.CreateTag
         public CreateTagCommandValidator()
         {
             RuleFor(cmd => cmd.Title).NotEmpty().MaximumLength(50);
+            RuleFor(cmd => cmd.UserId).NotEqual(Guid.Empty);
         }
     }
 }

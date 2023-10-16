@@ -7,6 +7,7 @@ namespace TimeTracker.Application.Projects.Queries.GetProjectDetails
         public GetProjectDetailsQueryValidator()
         {
             RuleFor(query => query.Id).NotEqual(Guid.Empty);
+            RuleFor(query => query.UserId).NotEqual(Guid.Empty);
         }
     }
 }

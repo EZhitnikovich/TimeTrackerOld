@@ -5,7 +5,7 @@ using TimeTracker.Domain;
 namespace TimeTracker.Application.Projects.Queries.GetProjectDetails
 {
     public class ProjectDetailVm: IMapWith<Project>
-    { // TODO: add user id
+    {
         public Guid Id { get; set; }
         public string Title {  get; set; }
         public DateTime CreationDate { get; set; }

@@ -20,7 +20,7 @@ namespace TimeTracker.Application.Activities.Commands.DeleteActivity
             var activity = await dbContext.Activities
                 .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
-            if (activity == null) // TODO: add user id
+            if (activity == null || activity.UserId != request.UserId)
             {
                 throw new NotFoundException(nameof(Project), request.Id);
             }

@@ -12,6 +12,7 @@ namespace TimeTracker.Application.Activities.Commands.CreateActivity
                 .NotNull()
                 .GreaterThan(0)
                 .GreaterThan(cmd => cmd.StartInMilliseconds);
+            RuleFor(cmd => cmd.UserId).NotEqual(Guid.Empty);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace TimeTracker.Application.Activities.Queries.GetActivityList
     {
         public GetActovityListQueryValidator()
         {
-            // TODO: add user id
+            RuleFor(query => query.UserId).NotEqual(Guid.Empty);
         }
     }
 }

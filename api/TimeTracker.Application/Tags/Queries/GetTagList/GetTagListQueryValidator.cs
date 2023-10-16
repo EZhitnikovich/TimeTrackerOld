@@ -6,7 +6,7 @@ namespace TimeTracker.Application.Tags.Queries.GetTagList
     {
         public GetTagListQueryValidator()
         {
-            // TODO: add user id
+            RuleFor(query => query.UserId).NotEqual(Guid.Empty);
         }
     }
 }

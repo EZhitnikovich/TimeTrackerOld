@@ -19,7 +19,8 @@ namespace TimeTracker.Application.Tags.Queries.GetTagList
 
         public async Task<TagListVm> Handle(GetTagListQuery request, CancellationToken cancellationToken)
         {
-            var tags = await dbContext.Tags // TODO: add user id
+            var tags = await dbContext.Tags
+                .Where(x => x.UserId == request.UserId)
                 .ProjectTo<TagLookupDto>(mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
 

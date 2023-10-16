@@ -19,7 +19,7 @@ namespace TimeTracker.Application.Projects.Commands.DeleteProject
         {
             var entity = await dbContext.Projects.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
-            if (entity == null) // TODO: add user id
+            if (entity == null || entity.UserId != request.UserId)
             {
                 throw new NotFoundException(nameof(Project), request.Id);
             }

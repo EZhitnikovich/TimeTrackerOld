@@ -7,6 +7,7 @@ namespace TimeTracker.Application.Projects.Commands.CreateProject
         public CreateProjectCommandValidator()
         {
             RuleFor(cmd => cmd.Title).NotEmpty().MaximumLength(100);
+            RuleFor(cmd => cmd.UserId).NotEqual(Guid.Empty);
         }
     }
 }

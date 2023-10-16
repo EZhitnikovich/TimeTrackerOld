@@ -23,7 +23,10 @@ namespace TimeTracker.Api.Controllers
         [Authorize]
         public async Task<ActionResult<ProjectListVm>> GetAll()
         {
-            var query = new GetProjectListQuery(); // TODO: add user id 
+            var query = new GetProjectListQuery()
+            {
+                UserId = UserId
+            };
             var vm = await Mediator.Send(query);
             return Ok(vm);
         }
@@ -32,8 +35,9 @@ namespace TimeTracker.Api.Controllers
         [Authorize]
         public async Task<ActionResult<ProjectDetailVm>> Get(Guid id)
         {
-            var query = new GetProjectDetailsQuery // TODO: add user id
+            var query = new GetProjectDetailsQuery
             {
+                UserId = UserId,
                 Id = id
             };
             var vm = await Mediator.Send(query);
@@ -45,7 +49,7 @@ namespace TimeTracker.Api.Controllers
         public async Task<ActionResult<Guid>> Create([FromBody] CreateProjectDto createProjectDto)
         {
             var command = mapper.Map<CreateProjectCommand>(createProjectDto);
-            // TODO: add user id
+            command.UserId = UserId;
             var id = await Mediator.Send(command);
             return Ok(id);
         }
@@ -55,7 +59,7 @@ namespace TimeTracker.Api.Controllers
         public async Task<IActionResult> Update([FromBody] UpdateProjectDto updateProjectDto)
         {
             var command = mapper.Map<UpdateProjectCommand>(updateProjectDto);
-            // TODO: add user id
+            command.UserId = UserId;
             await Mediator.Send(command);
             return NoContent();
         }
@@ -66,9 +70,9 @@ namespace TimeTracker.Api.Controllers
         {
             var command = new DeleteProjectCommand
             {
+                UserId = UserId,
                 Id = id
             };
-            // TODO: add user id
             await Mediator.Send(command);
             return NoContent();
         }

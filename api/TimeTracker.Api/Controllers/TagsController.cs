@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace TimeTracker.Api.Controllers
 {
-    public class TagsController : BaseController // TOOD: check exceptions
+    public class TagsController : BaseController
     {
         private readonly IMapper mapper;
 
@@ -23,7 +23,10 @@ namespace TimeTracker.Api.Controllers
         [Authorize]
         public async Task<ActionResult<TagListVm>> GetAll()
         {
-            var query = new GetTagListQuery(); // TODO: add user id
+            var query = new GetTagListQuery
+            {
+                UserId = UserId
+            };
             var vm = await Mediator.Send(query);
             return Ok(vm);
         }
@@ -32,8 +35,9 @@ namespace TimeTracker.Api.Controllers
         [Authorize]
         public async Task<ActionResult<TagDetailVm>> Get(Guid id)
         {
-            var query = new GetTagDetailsQuery // TODO: add user id
+            var query = new GetTagDetailsQuery
             {
+                UserId = UserId,
                 Id = id,
             };
             var vm = await Mediator.Send(query);
@@ -45,7 +49,7 @@ namespace TimeTracker.Api.Controllers
         public async Task<ActionResult<Guid>> Create([FromBody] CreateTagDto createTagDto)
         {
             var command = mapper.Map<CreateTagCommand>(createTagDto);
-            // TODO: add user id
+            command.UserId = UserId;
             var tagId = await Mediator.Send(command);
             return Ok(tagId);
         }
@@ -55,7 +59,7 @@ namespace TimeTracker.Api.Controllers
         public async Task<IActionResult> Update([FromBody] UpdateTagDto updateTagDto)
         {
             var command = mapper.Map<UpdateTagCommand>(updateTagDto);
-            // TODO: add user id
+            command.UserId = UserId;
             await Mediator.Send(command);
             return NoContent();
         }
@@ -66,6 +70,7 @@ namespace TimeTracker.Api.Controllers
         {
             var command = new DeleteTagCommand
             {
+                UserId = UserId,
                 Id = id,
             };
             await Mediator.Send(command);

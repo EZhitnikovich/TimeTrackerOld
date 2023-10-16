@@ -8,6 +8,7 @@ namespace TimeTracker.Application.Projects.Commands.UpdateProject
         {
             RuleFor(cmd => cmd.Id).NotEqual(Guid.Empty);
             RuleFor(cmd => cmd.Title).NotEmpty().MaximumLength(100);
+            RuleFor(cmd => cmd.UserId).NotEqual(Guid.Empty);
         }
     }
 }

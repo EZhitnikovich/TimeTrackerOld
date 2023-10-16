@@ -19,7 +19,7 @@ namespace TimeTracker.Application.Projects.Commands.UpdateProject
         {
             var entity = await dbContext.Projects.FirstOrDefaultAsync(project => project.Id == request.Id, cancellationToken);
 
-            if(entity == null) // TODO: add user id
+            if(entity == null || entity.UserId != request.UserId)
             {
                 throw new NotFoundException(nameof(Project), request.Id);
             }

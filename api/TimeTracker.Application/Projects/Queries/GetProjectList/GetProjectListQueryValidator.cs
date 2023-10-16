@@ -6,7 +6,7 @@ namespace TimeTracker.Application.Projects.Queries.GetProjectList
     {
         public GetProjectListQueryValidator()
         {
-            // TODO: add user id
+            RuleFor(query => query.UserId).NotEqual(Guid.Empty);
         }
     }
 }

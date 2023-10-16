@@ -3,7 +3,8 @@
 namespace TimeTracker.Application.Tags.Commands.DeleteTag
 {
     public class DeleteTagCommand : IRequest<Unit>
-    { // TODO: add user id
+    {
+        public Guid UserId { get; set; }
         public Guid Id { get; set; }
     }
 }

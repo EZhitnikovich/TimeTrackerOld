@@ -19,8 +19,10 @@ namespace TimeTracker.Application.Activities.Queries.GetActivityList
 
         public async Task<ActivityListVm> Handle(GetActivityListQuery request, CancellationToken cancellationToken)
         {
-            var activities = await dbContext.Activities // TODO: add user id
-                .Include(x => x.Project).Include(x => x.Tags) 
+            var activities = await dbContext.Activities
+                .Where(x=> x.UserId == request.UserId)
+                .Include(x => x.Project)
+                .Include(x => x.Tags) 
                 .ProjectTo<ActivityLookupDto>(mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
 

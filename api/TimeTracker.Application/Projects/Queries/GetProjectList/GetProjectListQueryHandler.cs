@@ -19,7 +19,8 @@ namespace TimeTracker.Application.Projects.Queries.GetProjectList
 
         public async Task<ProjectListVm> Handle(GetProjectListQuery request, CancellationToken cancellationToken)
         {
-            var projects = await dbContext.Projects // TODO: add user id
+            var projects = await dbContext.Projects
+                .Where(x => x.UserId == request.UserId)
                 .ProjectTo<ProjectLookupDto>(mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
 

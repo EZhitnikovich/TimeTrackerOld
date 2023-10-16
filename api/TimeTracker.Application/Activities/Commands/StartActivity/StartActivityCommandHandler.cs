@@ -16,14 +16,12 @@ namespace TimeTracker.Application.Activities.Commands.StartActivity
 
         public async Task<Guid> Handle(StartActivityCommand request, CancellationToken cancellationToken)
         {
-            var project = await dbContext.Projects.FirstOrDefaultAsync(x => x.Id == request.ProjectId);
-            // TODO: check if user have access to project
-
-            var tags = await dbContext.Tags.Where(x => request.TagIds.Contains(x.Id)).ToListAsync();
-            // TODO: check if user have access to tags
+            var project = await dbContext.Projects.FirstOrDefaultAsync(x => x.Id == request.ProjectId && x.UserId == request.UserId);
+            var tags = await dbContext.Tags.Where(x => x.UserId == request.UserId && request.TagIds.Contains(x.Id)).ToListAsync();
 
             var activity = new Activity
             {
+                UserId = request.UserId,
                 Id = Guid.NewGuid(),
                 Description = request.Description,
                 Tags = tags,
