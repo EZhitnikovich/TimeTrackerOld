@@ -21,6 +21,7 @@ namespace TimeTracker.Identity.Controllers
         [HttpGet]
         public IActionResult Login(string returnUrl)
         {
+            Console.WriteLine(returnUrl);
             var model = new LoginViewModel { ReturnUrl = returnUrl };
             return View(model);
         }
@@ -58,8 +59,8 @@ namespace TimeTracker.Identity.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            //if(!ModelState.IsValid)
-            //    return View(model);
+            if(!ModelState.IsValid)
+                return View(model);
 
             var user = new AppUser
             {
@@ -70,7 +71,7 @@ namespace TimeTracker.Identity.Controllers
             if(result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, false);
-                return Redirect("http://localhost:59002");
+                return Redirect(model.ReturnUrl);
             }
             ModelState.AddModelError(string.Empty, "Error occurred");
             return View(model);

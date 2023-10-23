@@ -17,3 +17,9 @@ services:
       - ASPNETCORE_URLS=http://+:80
     ports:
       - "59002:80"
+  web:
+    build:
+      context: ./web-client/
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
