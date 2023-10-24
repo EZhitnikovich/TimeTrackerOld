@@ -2,7 +2,7 @@ import { FC, ReactElement, useRef, useState } from "react";
 import { Client, CreateTagDto, TagLookupDto } from "../api/api";
 import { FormControl } from "react-bootstrap";
 
-const apiClient = new Client("");
+const apiClient = new Client("http://localhost:59002");
 
 async function createTag(tag: CreateTagDto) {
   await apiClient.createTag(tag);
@@ -24,6 +24,7 @@ const TagList: FC<{}> = (): ReactElement => {
       };
       createTag(tag);
       event.currentTarget.value = "";
+      setTimeout(getTags, 500);
     }
   };
 

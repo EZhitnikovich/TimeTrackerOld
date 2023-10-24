@@ -6,6 +6,7 @@ using TimeTracker.Persistence;
 using TimeTracker.Api.Middleware;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
+using Microsoft.IdentityModel.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -62,12 +63,15 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddAuthentication(config =>
 {
+    config.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
     config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     config.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    config.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
 })
     .AddJwtBearer("Bearer", options =>
     {
-        options.Authority = "https://localhost:59001/";
+        options.Authority = "http://localhost:59001";
+        options.MetadataAddress = "http://localhost:59001/.well-known/openid-configuration";
         options.Audience = "TimeTrackerWebAPI";
         options.RequireHttpsMetadata = false;
     });
@@ -88,6 +92,7 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
+IdentityModelEventSource.ShowPII = true;
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
