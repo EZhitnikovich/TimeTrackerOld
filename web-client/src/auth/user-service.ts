@@ -1,13 +1,14 @@
 import { UserManager, UserManagerSettings } from "oidc-client";
 import { setAuthHeader } from "./auth-headers";
+import { app_consts } from "../consts";
 
 const userManagerSettings: UserManagerSettings = {
   client_id: "time-tracker-web-api",
-  redirect_uri: "http://localhost:3000/signin-oidc",
+  redirect_uri: `${app_consts.WEB_URL}/signin-oidc`,
   response_type: "code",
   scope: "openid profile TimeTrackerWebAPI",
-  authority: "http://localhost:59001/",
-  post_logout_redirect_uri: "http://localhost:3000/signout-oidc",
+  authority: app_consts.IDENTITY_URL,
+  post_logout_redirect_uri: `${app_consts.WEB_URL}/signout-oidc`,
 };
 
 const userManager = new UserManager(userManagerSettings);

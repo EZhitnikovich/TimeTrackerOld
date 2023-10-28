@@ -61,6 +61,8 @@ builder.Services.AddCors(options =>
     });
 });
 
+var identityUrl = Environment.GetEnvironmentVariable("IDENTITY_URL");
+
 builder.Services.AddAuthentication(config =>
 {
     config.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -70,8 +72,8 @@ builder.Services.AddAuthentication(config =>
 })
     .AddJwtBearer("Bearer", options =>
     {
-        options.Authority = "http://localhost:59001";
-        options.MetadataAddress = "http://localhost:59001/.well-known/openid-configuration";
+        options.Authority = identityUrl;
+        options.MetadataAddress = $"{identityUrl}.well-known/openid-configuration";
         options.Audience = "TimeTrackerWebAPI";
         options.RequireHttpsMetadata = false;
     });

@@ -6,6 +6,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
+      - IDENTITY_URL=http://identity/
     depends_on:
       - identity
     ports:
@@ -17,9 +18,9 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
+      - ISSUER_URI=http://identity
     ports:
       - "59001:80"
-
   web:
     depends_on:
       - identity

@@ -1,8 +1,9 @@
-import { FC, ReactElement, useRef, useState } from "react";
+import { FC, ReactElement, useEffect, useRef, useState } from "react";
 import { Client, CreateTagDto, TagLookupDto } from "../api/api";
 import { FormControl } from "react-bootstrap";
+import { app_consts } from "../consts";
 
-const apiClient = new Client("http://localhost:59002");
+const apiClient = new Client(app_consts.API_URL);
 
 async function createTag(tag: CreateTagDto) {
   await apiClient.createTag(tag);
@@ -16,6 +17,10 @@ const TagList: FC<{}> = (): ReactElement => {
     const tagListVm = await apiClient.getAllTags();
     setTags(tagListVm.tags);
   }
+
+  useEffect(() => {
+    setTimeout(getTags, 500);
+  }, []);
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
@@ -36,7 +41,9 @@ const TagList: FC<{}> = (): ReactElement => {
       </div>
       <section>
         {tags?.map((tag) => (
-          <div>{tag.title}</div>
+          <div>
+            {tag.title} {tag.id}
+          </div>
         ))}
       </section>
     </div>
