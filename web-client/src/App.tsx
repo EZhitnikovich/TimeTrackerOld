@@ -1,11 +1,14 @@
 import { FC, ReactElement } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import userManager, { loadUser, signinRedirect } from "./auth/user-service";
-import AuthProvider from "./auth/auth-provider";
-import SignInOidc from "./auth/SigninOidc";
-import SignOutOidc from "./auth/SignoutOidc";
-import TagList from "./tags/TagList";
+import userManager, {
+  loadUser,
+  signinRedirect,
+} from "./Components/auth/user-service";
+import AuthProvider from "./Components/auth/auth-provider";
+import SignInOidc from "./Components/auth/SigninOidc";
+import SignOutOidc from "./Components/auth/SignoutOidc";
+import TagList from "./Pages/tags/TagList";
 
 const App: FC<{}> = (): ReactElement => {
   loadUser();

@@ -1,9 +1,9 @@
 import { FC, ReactElement, useEffect, useRef, useState } from "react";
-import { Client, CreateTagDto, TagLookupDto } from "../api/api";
+import { Client, CreateTagDto, TagLookupDto } from "../../api/api";
 import { FormControl } from "react-bootstrap";
-import { app_consts } from "../consts";
+import { Constants } from "../../Helpers/Constants";
 
-const apiClient = new Client(app_consts.API_URL);
+const apiClient = new Client(Constants.API_URL);
 
 async function createTag(tag: CreateTagDto) {
   await apiClient.createTag(tag);
