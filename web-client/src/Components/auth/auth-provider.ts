@@ -1,4 +1,4 @@
-import React, { Children, FC, useEffect, useRef } from "react";
+import { Children, FC, useEffect, useRef } from "react";
 import { User, UserManager } from "oidc-client";
 import { setAuthHeader } from "./auth-headers";
 

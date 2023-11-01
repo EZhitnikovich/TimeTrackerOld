@@ -9,6 +9,7 @@ import AuthProvider from "./Components/auth/auth-provider";
 import SignInOidc from "./Components/auth/SigninOidc";
 import SignOutOidc from "./Components/auth/SignoutOidc";
 import TagList from "./Pages/tags/TagList";
+import HomePage from "./Pages/HomePage";
 
 const App: FC<{}> = (): ReactElement => {
   loadUser();
@@ -19,7 +20,7 @@ const App: FC<{}> = (): ReactElement => {
         <AuthProvider userManager={userManager}>
           <BrowserRouter>
             <Routes>
-              <Route path="/" element={<TagList />} />
+              <Route path="/" element={<HomePage />} />
               <Route path="/signout-oidc" element={<SignOutOidc />} />
               <Route path="/signin-oidc" element={<SignInOidc />} />
             </Routes>
