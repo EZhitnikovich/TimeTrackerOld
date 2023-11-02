@@ -22,6 +22,8 @@ export default function HomePage() {
     string | undefined
   >();
 
+  const [description, setDescription] = useState<string>("");
+
   async function getActivities() {
     const activityListVm = await apiClient.getAllActivities();
     setActivities(activityListVm.activities);
@@ -60,10 +62,14 @@ export default function HomePage() {
     setSelectedProjectId(newValue.value);
   };
 
+  const handleDescriptionInput = (elem: React.FormEvent<HTMLInputElement>) => {
+    setDescription(elem.currentTarget.value);
+  };
+
   return (
     <div>
       <div className="">
-        <input placeholder="description" />
+        <input placeholder="description" onChange={handleDescriptionInput} />
         <CreatableSelect
           isClearable={true}
           placeholder="Select project"
@@ -91,7 +97,7 @@ export default function HomePage() {
       <button
         onClick={() =>
           apiClient.startActivity({
-            description: "t",
+            description: description,
             projectId: selectedProjectId,
             tagIds: selectedTagIds,
           })
