@@ -1,23 +1,23 @@
 import { FC, ReactElement } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import userManager, {
-  loadUser,
-  signinRedirect,
-} from "./Components/auth/user-service";
 import AuthProvider from "./Components/auth/auth-provider";
 import SignInOidc from "./Components/auth/SigninOidc";
 import SignOutOidc from "./Components/auth/SignoutOidc";
-import TagList from "./Pages/tags/TagList";
 import HomePage from "./Pages/HomePage";
+import HeaderElement from "./Components/HeaderElement";
+import { authManager } from "./Helpers/AuthenticationManager";
+
+authManager.loadUser();
 
 const App: FC<{}> = (): ReactElement => {
-  loadUser();
+  authManager.loadUser();
+  console.log("app", authManager.user);
   return (
     <div>
-      <header>
-        <button onClick={() => signinRedirect()}>Login</button>
-        <AuthProvider userManager={userManager}>
+      <HeaderElement />
+      <AuthProvider userManager={authManager.manager}>
+        <>
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<HomePage />} />
@@ -25,8 +25,8 @@ const App: FC<{}> = (): ReactElement => {
               <Route path="/signin-oidc" element={<SignInOidc />} />
             </Routes>
           </BrowserRouter>
-        </AuthProvider>
-      </header>
+        </>
+      </AuthProvider>
     </div>
   );
 };

@@ -1,13 +1,14 @@
 import { FC, useEffect } from "react";
-import { signoutRedirectCallback } from "./user-service";
 import { useNavigate } from "react-router-dom";
+import { authManager } from "../../Helpers/AuthenticationManager";
 
 const SignoutOidc: FC<{}> = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const signoutAsync = async () => {
-      await signoutRedirectCallback();
+      await authManager.signoutRedirectCallback();
       navigate("/");
+      window.location.reload();
     };
     signoutAsync();
   }, [navigate]);

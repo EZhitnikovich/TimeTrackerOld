@@ -3,6 +3,7 @@ import { ActivityLookupDto, ProjectLookupDto, TagLookupDto } from "../api/api";
 import { apiClient } from "../Helpers/ApiClient";
 import CreatableSelect from "react-select/creatable";
 import { MultiValue } from "react-select";
+import HeaderElement from "../Components/HeaderElement";
 
 type Option = {
   label: string;
