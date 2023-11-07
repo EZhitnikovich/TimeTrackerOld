@@ -1,25 +1,23 @@
-import React, { useEffect, useRef, useState } from "react";
-import { authManager } from "../Helpers/AuthenticationManager";
+import { useContext } from "react";
+import { AuthContext } from "./auth/authContext";
 
 export default function HeaderElement() {
+  const authContext = useContext(AuthContext);
   return (
     <div style={{ display: "flex" }}>
       <h2>TimeTracker</h2>
-      {authManager.isLoggedIn() ? (
-        <button
-          style={{ marginLeft: "auto" }}
-          onClick={() => authManager.signoutRedirect()}
-        >
-          Sign Out
-        </button>
-      ) : (
-        <button
-          style={{ marginLeft: "auto" }}
-          onClick={() => authManager.signinRedirect()}
-        >
-          Sign In
-        </button>
-      )}
+      <button
+        style={{ marginLeft: "auto" }}
+        onClick={() => authContext.logout()}
+      >
+        Sign Out
+      </button>
+      <button
+        style={{ marginLeft: "auto" }}
+        onClick={() => authContext.login()}
+      >
+        Sign In
+      </button>
     </div>
   );
 }

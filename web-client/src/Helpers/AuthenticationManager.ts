@@ -1,10 +1,15 @@
-import { User, UserManager, UserManagerSettings } from "oidc-client";
+import {
+  User,
+  UserManager,
+  UserManagerEvents,
+  UserManagerSettings,
+} from "oidc-client";
 import { Constants } from "./Constants";
 import { setAuthHeader } from "./AuthHeaders";
 
 export class AuthenticationManager {
   manager: UserManager;
-  user: User | null;
+  events: UserManagerEvents;
   constructor() {
     let settings: UserManagerSettings = {
       client_id: "time-tracker-web-api",
@@ -15,21 +20,20 @@ export class AuthenticationManager {
       post_logout_redirect_uri: `${Constants.WEB_URL}/signout-oidc`,
     };
     this.manager = new UserManager(settings);
-    this.user = null;
+    this.events = this.manager.events;
   }
 
-  isLoggedIn() {
-    return this.user != null && this.user.access_token && !this.user.expired;
+  getUser() {
+    return this.manager.getUser();
   }
 
-  async loadUser() {
-    await this.manager.getUser().then((user) => {
-      console.log("User: ", user);
-      this.user = user;
-      console.log("User: ", this.user);
-      const token = this.user?.access_token;
-      setAuthHeader(token);
-    });
+  storeToken(user?: User) {
+    if (!user) {
+      this.getUser().then((usr) => {
+        const token = usr?.access_token;
+        setAuthHeader(token);
+      });
+    }
   }
 
   signinRedirect = () => this.manager.signinRedirect();
