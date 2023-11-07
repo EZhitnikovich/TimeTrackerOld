@@ -1,5 +1,5 @@
 import { User } from "oidc-client";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { AuthenticationManager } from "../../Helpers/AuthenticationManager";
 import { setAuthHeader } from "../../Helpers/AuthHeaders";
 
@@ -58,7 +58,10 @@ function AuthProvider({ children }: AuthProviderProps) {
   };
 
   const login = () => authManager.signinRedirect();
-  const logout = () => authManager.signoutRedirect();
+  const logout = () =>
+    authManager.signoutRedirect({
+      id_token_hint: user?.id_token,
+    });
 
   const values = { user, login, logout, loginCallback, logoutCallback };
 
