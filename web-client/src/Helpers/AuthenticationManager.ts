@@ -5,14 +5,13 @@ import {
   UserManagerSettings,
 } from "oidc-client";
 import { Constants } from "./Constants";
-import { setAuthHeader } from "./AuthHeaders";
 
 export class AuthenticationManager {
   manager: UserManager;
   events: UserManagerEvents;
   constructor() {
     let settings: UserManagerSettings = {
-      client_id: "time-tracker-web-api",
+      client_id: Constants.CLIENT_ID,
       redirect_uri: `${Constants.WEB_URL}/signin-oidc`,
       response_type: "code",
       scope: "openid profile TimeTrackerWebAPI",
@@ -25,15 +24,6 @@ export class AuthenticationManager {
 
   getUser() {
     return this.manager.getUser();
-  }
-
-  storeToken(user?: User) {
-    if (!user) {
-      this.getUser().then((usr) => {
-        const token = usr?.access_token;
-        setAuthHeader(token);
-      });
-    }
   }
 
   signinRedirect = () => this.manager.signinRedirect();

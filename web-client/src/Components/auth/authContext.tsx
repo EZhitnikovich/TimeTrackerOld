@@ -2,9 +2,10 @@ import { User } from "oidc-client";
 import { createContext, useState } from "react";
 import { AuthenticationManager } from "../../Helpers/AuthenticationManager";
 import { setAuthHeader } from "../../Helpers/AuthHeaders";
+import { Constants } from "../../Helpers/Constants";
 
 interface AuthContextType {
-  user: User | null;
+  user: User | null | undefined;
   login: () => Promise<void>;
   logout: () => Promise<void>;
   loginCallback: () => Promise<void>;
@@ -18,9 +19,14 @@ type AuthProviderProps = {
 };
 
 function AuthProvider({ children }: AuthProviderProps) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null | undefined>(
+    JSON.parse(
+      sessionStorage.getItem(
+        `oidc.user:${Constants.IDENTITY_URL}:${Constants.CLIENT_ID}`
+      ) || "null"
+    )
+  );
   const authManager = new AuthenticationManager();
-
   const onUserLoaded = (user: User) => {
     console.log("User loaded: ", user);
     setAuthHeader(user.access_token);

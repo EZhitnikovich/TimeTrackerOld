@@ -1,7 +1,6 @@
 import { FC, ReactElement } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { authManager } from "./Helpers/AuthenticationManager";
 import AuthProvider from "./Components/auth/authContext";
 import HomePage from "./Pages/HomePage";
 import LogoutCallback from "./Components/auth/LogoutCallback";
@@ -9,8 +8,6 @@ import LoginCallback from "./Components/auth/LoginCallback";
 import LayoutWithAuth from "./Components/LayoutWithAuth";
 import LoginPage from "./Pages/LoginPage";
 import Layout from "./Components/Layout";
-
-authManager.storeToken();
 
 const App: FC<{}> = (): ReactElement => {
   return (
