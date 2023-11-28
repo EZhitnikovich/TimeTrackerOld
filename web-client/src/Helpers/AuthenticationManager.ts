@@ -17,6 +17,7 @@ export class AuthenticationManager {
       scope: "openid profile TimeTrackerWebAPI",
       authority: Constants.IDENTITY_URL,
       post_logout_redirect_uri: `${Constants.WEB_URL}/signout-oidc`,
+      automaticSilentRenew: true,
     };
     this.manager = new UserManager(settings);
     this.events = this.manager.events;
