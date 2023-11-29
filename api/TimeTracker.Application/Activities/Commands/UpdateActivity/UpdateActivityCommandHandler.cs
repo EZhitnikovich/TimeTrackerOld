@@ -17,7 +17,7 @@ namespace TimeTracker.Application.Activities.Commands.UpdateActivity
 
         public async Task<Unit> Handle(UpdateActivityCommand request, CancellationToken cancellationToken)
         {
-            var activity = await dbContext.Activities.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+            var activity = await dbContext.Activities.FirstOrDefaultAsync(x=> x.Id == request.Id, cancellationToken);
 
             if (activity == null || activity.UserId != request.UserId)
             {
@@ -25,9 +25,7 @@ namespace TimeTracker.Application.Activities.Commands.UpdateActivity
             }
 
             var project = await dbContext.Projects.FirstOrDefaultAsync(x => x.Id == request.ProjectId && x.UserId == request.UserId);
-            var tags = await dbContext.Tags.Where(x => request.TagIds != null &&
-                                                        x.UserId == request.UserId &&
-                                                        request.TagIds.Contains(x.Id)).ToListAsync();
+            var tags = await dbContext.Tags.Where(x => x.UserId == request.UserId && request.TagIds.Contains(x.Id)).ToListAsync();
 
             activity.EditDate = DateTime.Now;
             activity.Description = request.Description;

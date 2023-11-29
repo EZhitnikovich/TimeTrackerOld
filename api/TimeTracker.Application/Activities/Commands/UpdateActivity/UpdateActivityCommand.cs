@@ -10,6 +10,6 @@ namespace TimeTracker.Application.Activities.Commands.UpdateActivity
         public long StartInMilliseconds { get; set; }
         public long? EndInMilliseconds { get; set; }
         public Guid? ProjectId { get; set; }
-        public List<Guid>? TagIds { get; set; }
+        public List<Guid> TagIds { get; set; }
     }
 }

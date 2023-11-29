@@ -26,7 +26,6 @@ namespace TimeTracker.Application.Activities.Commands.DeleteActivity
             }
 
             dbContext.Activities.Remove(activity);
-            await dbContext.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
         }
