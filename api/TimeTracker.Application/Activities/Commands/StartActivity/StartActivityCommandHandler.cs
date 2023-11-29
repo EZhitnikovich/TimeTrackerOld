@@ -17,7 +17,9 @@ namespace TimeTracker.Application.Activities.Commands.StartActivity
         public async Task<Guid> Handle(StartActivityCommand request, CancellationToken cancellationToken)
         {
             var project = await dbContext.Projects.FirstOrDefaultAsync(x => x.Id == request.ProjectId && x.UserId == request.UserId);
-            var tags = await dbContext.Tags.Where(x => x.UserId == request.UserId && request.TagIds.Contains(x.Id)).ToListAsync();
+            var tags = await dbContext.Tags.Where(x => request.TagIds != null &&
+                                                        x.UserId == request.UserId &&
+                                                        request.TagIds.Contains(x.Id)).ToListAsync();
 
             var activity = new Activity
             {
