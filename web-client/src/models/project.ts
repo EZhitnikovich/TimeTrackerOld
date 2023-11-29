@@ -3,30 +3,30 @@ export interface CreateProjectDto {
 }
 
 export interface Project {
-  id?: string;
-  creationDate?: Date;
-  editDate?: Date | undefined;
+  id: string;
+  creationDate: Date;
+  editDate?: Date;
   userId?: string;
-  title?: string | undefined;
+  title: string;
 }
 
 export interface ProjectDetailVm {
-  id?: string;
-  title?: string | undefined;
-  creationDate?: Date;
-  editDate?: Date | undefined;
+  id: string;
+  title: string;
+  creationDate: Date;
+  editDate?: Date;
 }
 
 export interface ProjectListVm {
-  projects?: ProjectLookupDto[] | undefined;
+  projects: ProjectLookupDto[];
 }
 
 export interface ProjectLookupDto {
-  id?: string;
-  title?: string | undefined;
+  id: string;
+  title: string;
 }
 
 export interface UpdateProjectDto {
-  id?: string;
-  title?: string | undefined;
+  id: string;
+  title: string;
 }

@@ -3,30 +3,30 @@ export interface CreateTagDto {
 }
 
 export interface Tag {
-  id?: string;
-  creationDate?: Date;
-  editDate?: Date | undefined;
+  id: string;
+  creationDate: Date;
+  editDate?: Date;
   userId?: string;
-  title?: string | undefined;
+  title: string;
 }
 
 export interface TagDetailVm {
-  id?: string;
-  title?: string | undefined;
-  creationDate?: Date;
-  editDate?: Date | undefined;
+  id: string;
+  title: string;
+  creationDate: Date;
+  editDate?: Date;
 }
 
 export interface TagListVm {
-  tags?: TagLookupDto[] | undefined;
+  tags: TagLookupDto[];
 }
 
 export interface TagLookupDto {
-  id?: string;
-  title?: string | undefined;
+  id: string;
+  title: string;
 }
 
 export interface UpdateTagDto {
-  id?: string;
-  title?: string | undefined;
+  id: string;
+  title: string;
 }
