@@ -52,9 +52,8 @@ export const timeTrackerAPI = createApi({
     }),
     deleteTag: build.mutation<null, string>({
       query: (id) => ({
-        url: "/Tags/Delete",
+        url: `/Tags/Delete?id=${id}`,
         method: "DELETE",
-        body: id,
       }),
     }),
     // projects
@@ -82,9 +81,8 @@ export const timeTrackerAPI = createApi({
     }),
     deleteProject: build.mutation<null, string>({
       query: (id) => ({
-        url: "/Project/Delete",
+        url: `/Project/Delete?id=${id}`,
         method: "DELETE",
-        body: id,
       }),
       invalidatesTags: ["Project"],
     }),
@@ -113,9 +111,8 @@ export const timeTrackerAPI = createApi({
     }),
     deleteActivity: build.mutation<null, string>({
       query: (id) => ({
-        url: "/Activity/Delete",
+        url: `/Activity/Delete?id=${id}`,
         method: "DELETE",
-        body: id,
       }),
       invalidatesTags: ["Activity"],
     }),
@@ -129,9 +126,8 @@ export const timeTrackerAPI = createApi({
     }),
     stopActivity: build.mutation<null, string>({
       query: (id) => ({
-        url: "/Activity/Stop",
+        url: `/Activity/Stop?id=${id}`,
         method: "PUT",
-        body: id,
       }),
       invalidatesTags: ["Activity"],
     }),
