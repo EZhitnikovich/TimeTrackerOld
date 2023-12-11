@@ -17,15 +17,15 @@ namespace TimeTracker.Application.Activities.Commands.UpdateActivity
 
         public async Task<Unit> Handle(UpdateActivityCommand request, CancellationToken cancellationToken)
         {
-            var activity = await dbContext.Activities.FirstOrDefaultAsync(x=> x.Id == request.Id, cancellationToken);
+            var activity = await dbContext.Activities.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
             if (activity == null || activity.UserId != request.UserId)
             {
                 throw new NotFoundException(nameof(Activity), request.Id);
             }
 
-            var project = await dbContext.Projects.FirstOrDefaultAsync(x => x.Id == request.ProjectId && x.UserId == request.UserId);
-            var tags = await dbContext.Tags.Where(x => x.UserId == request.UserId && request.TagIds.Contains(x.Id)).ToListAsync();
+            var project = await dbContext.Projects.FirstOrDefaultAsync(x => x.Equals(request.Project) && x.UserId == request.UserId);
+            var tags = await dbContext.Tags.Include(x => x.Activities).Where(x => x.UserId == request.UserId && request.Tags.Contains(x)).ToListAsync();
 
             activity.EditDate = DateTime.Now;
             activity.Description = request.Description;
